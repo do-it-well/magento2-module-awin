@@ -1,0 +1,4 @@
+<?php /** @var $block \DIW\AWIN\Block\MasterTag */ ?>
+<?php if ($block->getAwinEnabled()) : ?>
+<script src="https://www.dwin1.com/<?= $block->escapeHtmlAttr($block->escapeUrl($block->getAwinAdvertiserId())); ?>.js" type="text/javascript" defer="defer"></script>
+<?php endif; ?>

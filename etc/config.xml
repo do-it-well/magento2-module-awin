@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <awin>
+            <tracking>
+                <enable>1</enable>
+                <advertiser_id></advertiser_id>
+                <commission_group>Default</commission_group>
+                <channel>aw</channel>
+                <test>0</test>
+            </tracking>
+        </awin>
+    </default>
+</config>
