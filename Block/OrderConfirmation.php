@@ -27,9 +27,32 @@ class OrderConfirmation extends \Magento\Framework\View\Element\Template
 
     protected function buildAwinData(Order $order)
     {
+        // The grand total is the full amount, taking into account all Taxes,
+        // Discounts, and Shipping Cost.
+
+        // The shipping subtotal is our attempt to calculate the amount of the
+        // Grand Total which would relate to shipping costs.
+        // The formula we use is:
+        // [The full original shipping amount, including all taxes, before
+        //  discounts have been applied]
+        // Minus:
+        // [ The amount that the shipping price was discounted ]
+
+        // The shipping discount tax compensation amount is not taken into
+        // consideration. That is: it assumes that shipping costs are not taxed,
+        // or that the shipping discount is inclusive of any tax.
+
+        $shipping_subtotal = (
+            $order->getShippingInclTax() -
+            $order->getShippingDiscountAmount()
+        );
+        $commisionable_subtotal = (
+            $order->getGrandTotal() -
+            $shipping_subtotal
+        );
         return array(
             'order_id'  => $order->getIncrementId(),
-            'order_subtotal' => number_format($order->getGrandTotal(), 2, '.', ''),
+            'order_subtotal' => number_format($commisionable_subtotal, 2, '.', ''),
             'order_currency_code' => $order->getOrderCurrencyCode(),
             'order_coupon_code' => $order->getCouponCode(),
             'awin_advertiser_id' => $this->_awinHelper->getAdvertiserId(),
