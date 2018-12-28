@@ -42,12 +42,26 @@ class OrderConfirmation extends \Magento\Framework\View\Element\Template
         // consideration. That is: it assumes that shipping costs are not taxed,
         // or that the shipping discount is inclusive of any tax.
 
+        // The item tax is our attempt to calculate the amount of tax which is
+        // related only to items, not to shipping.
+
+        // The commissionable amount is the grand total, excluding all shipping
+        // related costs and item related taxes.
+
+        // There may be some tax setting configurations where this is not the
+        // case. In testing we were not able to find any such configurations,
+        // and so those configurations, if they exist, are not handled.
         $shipping_subtotal = (
             $order->getShippingInclTax() -
             $order->getShippingDiscountAmount()
         );
+        $item_tax = (
+            $order->getTaxAmount() -
+            $order->getShippingTaxAmount()
+        );
         $commisionable_subtotal = (
             $order->getGrandTotal() -
+            $item_tax -
             $shipping_subtotal
         );
         return array(

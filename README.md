@@ -35,6 +35,20 @@ Configuration options are:
 | Channel | AWIN Tracking Channel (this probably won't ever change) | "aw" |
 | Test Mode | Sets the "test mode" flag when sending AWIN Tracking data. Use this when performing initial test transactions | No |
 
+## Tax Configuration
+
+This module has been developed based on the expectations of tax configuration in
+the United Kingdom, ie: all prices are shown inclusive of tax, discounts apply
+to that tax-inclusive price, shipping is taxed at the same rate as most
+products, etc.
+
+It is known that certain other tax configurations will result in totals and
+commission values which may not line up with expectations. The specifics of
+these configurations are not presently known. Adding support for them should be
+fairly trivial, so please open an issue on GitHub if support for such a
+configuration is required, detailing the specifics of your **Sales** > **Tax**
+settings (see "Support" for details on where to open an issue).
+
 ## License
 
 All module code within this repository is licensed under the MIT license. See
