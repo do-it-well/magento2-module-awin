@@ -92,7 +92,7 @@ class OrderConfirmation extends \Magento\Framework\View\Element\Template
 
         $query = '';
         foreach( $query_data as $key => $value ){
-            $query .= '&'.$this->escapeUrl($key).'='.$this->escapeUrl($value);
+            $query .= '&'.urlencode($key).'='.urlencode($value);
         }
 
         return 'https://www.awin1.com/sread.img?tt=ns&tv=2'.$query;
